@@ -1,0 +1,2787 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <title>OPE Enfermería — Preparador SESPA</title>
+    <style>
+      :root {
+        --bg: #f6fbff;
+        --bg-soft: #ecfdf5;
+        --surface: #ffffff;
+        --surface-muted: #f8fafc;
+        --text: #102a43;
+        --muted: #526579;
+        --line: #d8e5ee;
+        --primary: #075985;
+        --primary-strong: #0b4f71;
+        --primary-soft: #e0f2fe;
+        --success: #047857;
+        --success-soft: #dcfce7;
+        --danger: #b42318;
+        --danger-soft: #fee4e2;
+        --warning: #b45309;
+        --warning-soft: #fff7ed;
+        --focus: #0ea5e9;
+        --shadow: 0 12px 28px rgba(7, 89, 133, 0.08);
+        --radius: 8px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        min-height: 100%;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        background:
+          linear-gradient(135deg, rgba(224, 242, 254, 0.75), rgba(236, 253, 245, 0.72) 52%, rgba(255, 255, 255, 0.95)),
+          var(--bg);
+        color: var(--text);
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      button:disabled {
+        cursor: not-allowed;
+      }
+
+      :focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 3px;
+      }
+
+      .page-shell {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 24px 0 44px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 28px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      .brand-mark {
+        display: grid;
+        width: 44px;
+        height: 44px;
+        flex: 0 0 auto;
+        place-items: center;
+        border: 0;
+        border-radius: var(--radius);
+        background: var(--primary);
+        color: #ffffff;
+        box-shadow: 0 8px 18px rgba(7, 89, 133, 0.14);
+      }
+
+      .brand-title {
+        display: block;
+        color: var(--text);
+        font-size: 1.02rem;
+        font-weight: 800;
+        line-height: 1.2;
+      }
+
+      .brand-subtitle,
+      .eyebrow {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      main {
+        display: block;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 850px;
+        margin-bottom: 12px;
+        font-size: clamp(2rem, 5vw, 3.35rem);
+        line-height: 1.05;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        margin-bottom: 12px;
+        font-size: clamp(1.45rem, 3vw, 2.15rem);
+        line-height: 1.15;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin-bottom: 8px;
+        font-size: 1.05rem;
+      }
+
+      .lead {
+        max-width: 760px;
+        color: var(--muted);
+        font-size: 1.08rem;
+      }
+
+      .view-stack {
+        display: grid;
+        gap: 22px;
+      }
+
+      .welcome-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+        gap: 24px;
+        align-items: start;
+      }
+
+      .study-panel,
+      .form-panel,
+      .quiz-panel,
+      .result-panel {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: var(--shadow);
+      }
+
+      .study-panel {
+        padding: clamp(22px, 4vw, 34px);
+      }
+
+      .form-panel,
+      .quiz-panel,
+      .result-panel {
+        padding: 22px;
+      }
+
+      .hero-metrics,
+      .summary-grid,
+      .stats-grid,
+      .result-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      .metric-card,
+      .stat-card {
+        min-width: 0;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+      }
+
+      .metric-label,
+      .stat-label,
+      .quiz-stat-label {
+        display: block;
+        color: var(--muted);
+        font-size: 0.86rem;
+        font-weight: 700;
+      }
+
+      .metric-value,
+      .stat-value,
+      .quiz-stat-value {
+        display: block;
+        margin-top: 4px;
+        color: var(--text);
+        font-size: 1.55rem;
+        font-weight: 850;
+        line-height: 1.1;
+      }
+
+      .field-group {
+        display: grid;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      label {
+        color: var(--text);
+        font-weight: 750;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        min-height: 48px;
+        border: 1px solid #b8c9d8;
+        border-radius: var(--radius);
+        background: var(--surface);
+        color: var(--text);
+        padding: 12px 14px;
+      }
+
+      input[type="text"]:focus {
+        border-color: var(--focus);
+      }
+
+      .help-text {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .field-error {
+        min-height: 1.35em;
+        margin: 0;
+        color: var(--danger);
+        font-size: 0.92rem;
+        font-weight: 700;
+      }
+
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 46px;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        border: 1px solid transparent;
+        border-radius: var(--radius);
+        padding: 11px 16px;
+        background: var(--primary);
+        color: #ffffff;
+        font-weight: 800;
+        text-decoration: none;
+        transition:
+          transform 160ms ease,
+          background-color 160ms ease,
+          border-color 160ms ease;
+      }
+
+      .button:hover {
+        background: var(--primary-strong);
+        transform: translateY(-1px);
+      }
+
+      .button.secondary {
+        border-color: #b9d7e8;
+        background: var(--primary-soft);
+        color: var(--primary-strong);
+      }
+
+      .button.secondary:hover {
+        background: #cfefff;
+      }
+
+      .button.ghost {
+        border-color: var(--line);
+        background: var(--surface);
+        color: var(--text);
+      }
+
+      .button.ghost:hover {
+        border-color: #a9c7d7;
+        background: var(--surface-muted);
+      }
+
+      .button.danger {
+        border-color: #fecaca;
+        background: var(--danger-soft);
+        color: var(--danger);
+      }
+
+      .button.danger:hover {
+        background: #ffd9d6;
+      }
+
+      .button:disabled,
+      .action-card:disabled {
+        opacity: 0.56;
+        transform: none;
+      }
+
+      .dashboard-heading {
+        display: grid;
+        gap: 4px;
+      }
+
+      .action-grid,
+      .topic-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .action-card,
+      .topic-card {
+        display: grid;
+        width: 100%;
+        min-height: 150px;
+        align-content: start;
+        gap: 10px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+        color: var(--text);
+        padding: 18px;
+        text-align: left;
+        box-shadow: 0 8px 18px rgba(15, 23, 42, 0.05);
+        transition:
+          transform 160ms ease,
+          border-color 160ms ease,
+          box-shadow 160ms ease;
+      }
+
+      .action-card:hover,
+      .topic-card:hover {
+        border-color: #9bc9df;
+        box-shadow: 0 12px 24px rgba(7, 89, 133, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .action-icon {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        place-items: center;
+        border-radius: var(--radius);
+        background: var(--primary-soft);
+        color: var(--primary);
+      }
+
+      .action-title,
+      .topic-title {
+        display: block;
+        font-size: 1.02rem;
+        font-weight: 850;
+        line-height: 1.25;
+      }
+
+      .action-meta,
+      .topic-meta {
+        display: block;
+        color: var(--muted);
+        font-size: 0.93rem;
+      }
+
+      .section-header {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 18px;
+      }
+
+      .section-header > div {
+        min-width: 0;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid #b9d7e8;
+        border-radius: 999px;
+        background: var(--primary-soft);
+        color: var(--primary-strong);
+        padding: 7px 10px;
+        font-size: 0.88rem;
+        font-weight: 800;
+      }
+
+      .quiz-options-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .choice-button {
+        min-height: 118px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+        color: var(--text);
+        padding: 16px;
+        text-align: left;
+        transition:
+          transform 160ms ease,
+          border-color 160ms ease;
+      }
+
+      .choice-button:hover {
+        border-color: #9bc9df;
+        transform: translateY(-2px);
+      }
+
+      .choice-number {
+        display: block;
+        color: var(--primary);
+        font-size: 2rem;
+        font-weight: 900;
+        line-height: 1;
+      }
+
+      .choice-label {
+        display: block;
+        margin-top: 8px;
+        color: var(--text);
+        font-weight: 800;
+      }
+
+      .quiz-topline {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .quiz-meta {
+        display: grid;
+        gap: 4px;
+      }
+
+      .quiz-topic {
+        color: var(--primary-strong);
+        font-weight: 850;
+      }
+
+      .quiz-counter {
+        color: var(--muted);
+        font-weight: 750;
+      }
+
+      .progress-track {
+        overflow: hidden;
+        width: 100%;
+        height: 12px;
+        border-radius: 999px;
+        background: #dbeafe;
+      }
+
+      .progress-bar {
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #0f766e, #0284c7);
+        transition: width 220ms ease;
+      }
+
+      .quiz-stat-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin: 18px 0;
+      }
+
+      .quiz-stat {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface-muted);
+        padding: 12px;
+      }
+
+      .question-text {
+        margin: 18px 0;
+        font-size: clamp(1.18rem, 2.5vw, 1.55rem);
+        line-height: 1.32;
+      }
+
+      .options-group {
+        display: grid;
+        gap: 10px;
+      }
+
+      .option-button {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        gap: 12px;
+        align-items: center;
+        width: 100%;
+        min-height: 64px;
+        border: 1px solid #c8d8e5;
+        border-radius: var(--radius);
+        background: var(--surface);
+        color: var(--text);
+        padding: 13px 14px;
+        text-align: left;
+        transition:
+          border-color 160ms ease,
+          background-color 160ms ease,
+          transform 160ms ease;
+      }
+
+      .option-button:not(:disabled):hover {
+        border-color: var(--primary);
+        background: #f0f9ff;
+        transform: translateY(-1px);
+      }
+
+      .option-letter {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        place-items: center;
+        border-radius: var(--radius);
+        background: var(--primary-soft);
+        color: var(--primary);
+        font-weight: 900;
+      }
+
+      .option-text {
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+
+      .answer-state {
+        min-width: max-content;
+        color: var(--muted);
+        font-size: 0.88rem;
+        font-weight: 850;
+      }
+
+      .option-button.correct {
+        border-color: #34d399;
+        background: var(--success-soft);
+      }
+
+      .option-button.correct .option-letter {
+        background: var(--success);
+        color: #ffffff;
+      }
+
+      .option-button.correct .answer-state {
+        color: var(--success);
+      }
+
+      .option-button.incorrect {
+        border-color: #f97066;
+        background: var(--danger-soft);
+      }
+
+      .option-button.incorrect .option-letter {
+        background: var(--danger);
+        color: #ffffff;
+      }
+
+      .option-button.incorrect .answer-state {
+        color: var(--danger);
+      }
+
+      .option-button.neutral-after {
+        background: #f8fafc;
+        color: #475569;
+      }
+
+      .feedback {
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 12px;
+        margin-top: 16px;
+        border-radius: var(--radius);
+        padding: 14px;
+      }
+
+      .feedback.success {
+        border: 1px solid #86efac;
+        background: var(--success-soft);
+      }
+
+      .feedback.error {
+        border: 1px solid #fda29b;
+        background: var(--danger-soft);
+      }
+
+      .feedback-icon {
+        display: grid;
+        width: 36px;
+        height: 36px;
+        place-items: center;
+        border-radius: var(--radius);
+        background: var(--surface);
+      }
+
+      .feedback strong {
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .feedback p {
+        margin-bottom: 8px;
+      }
+
+      .feedback p:last-child {
+        margin-bottom: 0;
+      }
+
+      .question-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 16px;
+      }
+
+      .empty-state {
+        border: 1px dashed #b9cbd8;
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.78);
+        padding: 26px;
+      }
+
+      .failed-list,
+      .topic-stat-list {
+        display: grid;
+        gap: 10px;
+      }
+
+      .failed-item,
+      .topic-stat-item {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+        padding: 14px;
+      }
+
+      .topic-stat-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 10px;
+      }
+
+      .bar-line {
+        overflow: hidden;
+        width: 100%;
+        height: 10px;
+        border-radius: 999px;
+        background: #e2e8f0;
+      }
+
+      .bar-line > span {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        background: #0f766e;
+      }
+
+      .result-score {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin: 8px 0 18px;
+        color: var(--primary-strong);
+        font-size: clamp(2rem, 5vw, 3.3rem);
+        font-weight: 950;
+        line-height: 1;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        clip-path: inset(50%);
+      }
+
+      @media (max-width: 920px) {
+        .welcome-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .action-grid,
+        .topic-grid,
+        .quiz-options-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 680px) {
+        .page-shell {
+          width: min(100% - 22px, 1120px);
+          padding-top: 16px;
+        }
+
+        .topbar {
+          align-items: flex-start;
+        }
+
+        .brand-mark {
+          width: 42px;
+          height: 42px;
+        }
+
+        .section-header,
+        .quiz-topline,
+        .topic-stat-head {
+          display: grid;
+          align-items: start;
+        }
+
+        .hero-metrics,
+        .summary-grid,
+        .stats-grid,
+        .result-grid,
+        .action-grid,
+        .topic-grid,
+        .quiz-options-grid,
+        .quiz-stat-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .button-row,
+        .question-actions {
+          display: grid;
+          grid-template-columns: 1fr;
+        }
+
+        .button {
+          width: 100%;
+        }
+
+        .option-button {
+          grid-template-columns: auto minmax(0, 1fr);
+        }
+
+        .answer-state {
+          grid-column: 2;
+          min-width: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar" aria-label="Cabecera de la aplicación">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+              <path d="M10.2 5.8h3.6v4.4h4.4v3.6h-4.4v4.4h-3.6v-4.4H5.8v-3.6h4.4V5.8Z" fill="currentColor" />
+              <circle cx="17.7" cy="6.3" r="2.1" fill="#34d399" />
+            </svg>
+          </span>
+          <span>
+            <span class="brand-subtitle">SESPA · OPE Enfermería</span>
+            <strong class="brand-title">Preparador de test</strong>
+          </span>
+        </div>
+      </header>
+
+      <main id="app" aria-live="off"></main>
+      <div id="live-region" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+    </div>
+
+    <script>
+      "use strict";
+
+      // ========================================
+      // AÑADIR NUEVOS TEMAS Y PREGUNTAS AQUÍ
+      // ========================================
+      const QUESTION_BANK = [
+        {
+          "id": "T25-001",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "El Modelo de Creencias de Salud fue desarrollado por:",
+          "options": [
+            "Green y Kreuter en 1984.",
+            "Rosenstock en 1974.",
+            "Prochaska y DiClemente en 1974.",
+            "Kapferer en 1980."
+          ],
+          "correctAnswer": 1,
+          "explanation": "El Health Belief Model se asocia a Rosenstock y al año 1974."
+        },
+        {
+          "id": "T25-002",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "Según el Modelo de Creencias de Salud, las creencias del individuo presentan:",
+          "options": [
+            "Un componente exclusivamente cognitivo.",
+            "Un componente exclusivamente emocional.",
+            "Un componente cognitivo y otro emocional.",
+            "Un componente conductual y otro ambiental."
+          ],
+          "correctAnswer": 2,
+          "explanation": "El modelo considera que las creencias incluyen un componente cognitivo y otro emocional."
+        },
+        {
+          "id": "T25-003",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "Una persona que afirma «no me siento capaz de administrarme la insulina» presenta una dificultad relacionada con:",
+          "options": [
+            "La autoestima.",
+            "La autoeficacia.",
+            "El locus de control.",
+            "La atribución de causalidad."
+          ],
+          "correctAnswer": 1,
+          "explanation": "La autoeficacia es el sentimiento de ser capaz o no de introducir un cambio o realizar una conducta."
+        },
+        {
+          "id": "T25-004",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "El sentimiento de poder o no poder controlar los acontecimientos que le suceden a una persona se denomina:",
+          "options": [
+            "Locus de control.",
+            "Presión de grupo.",
+            "Autoestima.",
+            "Creencia de gravedad."
+          ],
+          "correctAnswer": 0,
+          "explanation": "El locus de control expresa la percepción de poder controlar los acontecimientos que le suceden a la persona."
+        },
+        {
+          "id": "T25-005",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "La consideración de que una enfermedad se debe a un virus constituye una atribución de causalidad:",
+          "options": [
+            "Interna.",
+            "Emocional.",
+            "Externa.",
+            "Social."
+          ],
+          "correctAnswer": 2,
+          "explanation": "Un virus es un factor externo, por lo que se trata de una atribución de causalidad externa."
+        },
+        {
+          "id": "T25-006",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "¿Cuántos determinantes conductuales se describen en el Modelo de Creencias de Salud?",
+          "options": [
+            "Seis.",
+            "Siete.",
+            "Ocho.",
+            "Nueve."
+          ],
+          "correctAnswer": 3,
+          "explanation": "Se describen nueve determinantes: cinco personales y cuatro relacionados con costes y entorno social."
+        },
+        {
+          "id": "T25-007",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "Según el Modelo de Creencias de Salud, una persona adoptará una conducta cuando:",
+          "options": [
+            "Los costes sean superiores a los beneficios.",
+            "Los beneficios sean superiores a los costes.",
+            "Desconozca la gravedad de la enfermedad.",
+            "No exista presión social."
+          ],
+          "correctAnswer": 1,
+          "explanation": "La conducta se adopta cuando la persona percibe que los beneficios superan los costes o pérdidas."
+        },
+        {
+          "id": "T25-008",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "¿Cuál de los siguientes NO forma parte de las cuatro dimensiones clásicas del Modelo de Creencias de Salud?",
+          "options": [
+            "Susceptibilidad percibida.",
+            "Gravedad percibida.",
+            "Beneficios potenciales.",
+            "Relación con el profesional sanitario."
+          ],
+          "correctAnswer": 3,
+          "explanation": "Las cuatro dimensiones clásicas son susceptibilidad, gravedad, beneficios y barreras."
+        },
+        {
+          "id": "T25-009",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "En el Modelo de Creencias de Salud, los medios de comunicación y los consejos de otras personas pueden actuar como:",
+          "options": [
+            "Factores reforzantes.",
+            "Estímulos de acción.",
+            "Barreras percibidas.",
+            "Contingencias económicas."
+          ],
+          "correctAnswer": 1,
+          "explanation": "Los medios de comunicación y los consejos de otras personas son ejemplos de estímulos que ponen en marcha la nueva conducta."
+        },
+        {
+          "id": "T25-010",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "La principal crítica realizada al Modelo de Creencias de Salud es que:",
+          "options": [
+            "No considera las creencias individuales.",
+            "No contempla la gravedad percibida.",
+            "Apenas considera la influencia del medio físico y social.",
+            "Se centra exclusivamente en las políticas sanitarias."
+          ],
+          "correctAnswer": 2,
+          "explanation": "Su crítica principal es que apenas tiene en cuenta la importante influencia del medio ambiente físico y social."
+        },
+        {
+          "id": "T25-011",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "En el modelo de comunicación persuasiva o KAP, la secuencia correcta es:",
+          "options": [
+            "Actitudes → conocimientos → hábitos.",
+            "Conocimientos → hábitos → actitudes.",
+            "Conocimientos → actitudes → hábitos.",
+            "Hábitos → actitudes → conocimientos."
+          ],
+          "correctAnswer": 2,
+          "explanation": "KAP significa Knowledge, Attitudes y Practices: conocimientos, actitudes y hábitos."
+        },
+        {
+          "id": "T25-012",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "En relación con el modelo KAP, señale la respuesta correcta:",
+          "options": [
+            "Los cambios de actitud siempre producen cambios de conducta.",
+            "La información debe proporcionarse de manera confusa para estimular la reflexión.",
+            "El receptor puede desarrollar mecanismos de defensa ante mensajes repetidos.",
+            "La motivación del individuo no influye en el cambio de hábitos."
+          ],
+          "correctAnswer": 2,
+          "explanation": "Una crítica al KAP es que los mensajes repetidos pueden generar mecanismos de defensa en el receptor."
+        },
+        {
+          "id": "T25-013",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "Para superar las limitaciones del modelo de comunicación persuasiva se recomienda:",
+          "options": [
+            "Eliminar la información sanitaria.",
+            "Incorporar las contingencias situacionales y valorar la motivación.",
+            "Actuar únicamente mediante medidas legislativas.",
+            "Sustituir los conocimientos por incentivos económicos."
+          ],
+          "correctAnswer": 1,
+          "explanation": "El modelo mejora al incorporar variables que facilitan el paso de la actitud a la conducta y al valorar la motivación."
+        },
+        {
+          "id": "T25-014",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "El modelo de las contingencias situacionales fue desarrollado por:",
+          "options": [
+            "Kapferer.",
+            "Rosenstock.",
+            "Rochon.",
+            "Bandura."
+          ],
+          "correctAnswer": 0,
+          "explanation": "El modelo de contingencias situacionales se atribuye a Kapferer."
+        },
+        {
+          "id": "T25-015",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "¿Cuál de las siguientes NO es una contingencia situacional que facilite el cambio de comportamiento?",
+          "options": [
+            "Incluir instrucciones sobre cómo realizar el cambio.",
+            "Disponer de servicios de apoyo.",
+            "Contar con un medio ambiente favorable.",
+            "Aumentar únicamente la percepción de gravedad."
+          ],
+          "correctAnswer": 3,
+          "explanation": "Las contingencias son instrucciones prácticas, servicios de apoyo y un medio ambiente favorable."
+        },
+        {
+          "id": "T25-016",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "El modelo de políticas económicas también recibe la denominación de modelo:",
+          "options": [
+            "Cognitivo, progresivo y conductual.",
+            "Ecológico, ambientalista y radical.",
+            "Persuasivo, pragmático y facilitador.",
+            "Integrador, familiar y comunitario."
+          ],
+          "correctAnswer": 1,
+          "explanation": "Políticas económicas, ecológico, ambientalista y radical son denominaciones equivalentes en este tema."
+        },
+        {
+          "id": "T25-017",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "Según el modelo de políticas económicas, los programas de Educación para la Salud deberían ser diseñados por:",
+          "options": [
+            "Los profesionales de enfermería exclusivamente.",
+            "Las autoridades sanitarias exclusivamente.",
+            "La población en su conjunto.",
+            "Las empresas privadas."
+          ],
+          "correctAnswer": 2,
+          "explanation": "Este modelo considera que la población en su conjunto debe diseñar los programas de Educación para la Salud."
+        },
+        {
+          "id": "T25-018",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "El enfoque asumido por la Organización Mundial de la Salud es el modelo:",
+          "options": [
+            "Pragmático.",
+            "De creencias de salud.",
+            "Integrador.",
+            "FACILE."
+          ],
+          "correctAnswer": 0,
+          "explanation": "El modelo pragmático es el enfoque asumido por la OMS."
+        },
+        {
+          "id": "T25-019",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "El modelo pragmático se caracteriza por:",
+          "options": [
+            "Intervenir exclusivamente sobre el individuo.",
+            "Intervenir exclusivamente sobre el medio ambiente.",
+            "Aunar actuaciones sobre el individuo y el medio ambiente.",
+            "Rechazar las medidas legislativas."
+          ],
+          "correctAnswer": 2,
+          "explanation": "Es un enfoque multifactorial que interviene tanto sobre la persona como sobre su entorno."
+        },
+        {
+          "id": "T25-020",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "Una campaña informativa sobre los riesgos del tabaco acompañada de una ley que prohíbe fumar en espacios públicos corresponde principalmente al modelo:",
+          "options": [
+            "De comunicación persuasiva.",
+            "Pragmático.",
+            "Integrador.",
+            "FACILE."
+          ],
+          "correctAnswer": 1,
+          "explanation": "El modelo pragmático combina campañas de información con medidas legislativas."
+        },
+        {
+          "id": "T25-021",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "El Modelo Transteórico o Modelo de las Etapas del Cambio fue desarrollado por:",
+          "options": [
+            "Green y Kreuter.",
+            "Rosenstock y Bandura.",
+            "Prochaska y DiClemente.",
+            "Kapferer y Rochon."
+          ],
+          "correctAnswer": 2,
+          "explanation": "El Modelo Transteórico se asocia a Prochaska y DiClemente."
+        },
+        {
+          "id": "T25-022",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "El Modelo Transteórico se aplicó inicialmente al tratamiento de:",
+          "options": [
+            "Enfermedades infecciosas.",
+            "Conductas adictivas.",
+            "Enfermedades profesionales.",
+            "Problemas familiares."
+          ],
+          "correctAnswer": 1,
+          "explanation": "El modelo surgió en el contexto del cambio de conductas adictivas."
+        },
+        {
+          "id": "T25-023",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "¿Cuál de las siguientes NO es una de las cinco variables del Modelo Transteórico?",
+          "options": [
+            "Etapas del cambio.",
+            "Balance decisorio.",
+            "Tentación.",
+            "Diagnóstico epidemiológico."
+          ],
+          "correctAnswer": 3,
+          "explanation": "Las cinco variables son etapas, procesos, balance decisorio, tentación y autoeficacia."
+        },
+        {
+          "id": "T25-024",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "Una persona reconoce que tiene un problema y se plantea cambiar su conducta en los próximos seis meses. ¿En qué etapa se encuentra?",
+          "options": [
+            "Precontemplación.",
+            "Contemplación.",
+            "Preparación.",
+            "Acción."
+          ],
+          "correctAnswer": 1,
+          "explanation": "La contemplación implica reconocer el problema y plantearse el cambio en los próximos seis meses."
+        },
+        {
+          "id": "T25-025",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "Una persona tiene intención de modificar su conducta en los próximos 30 días. Según el Modelo Transteórico, se encuentra en la etapa de:",
+          "options": [
+            "Preparación.",
+            "Contemplación.",
+            "Mantenimiento.",
+            "Terminación."
+          ],
+          "correctAnswer": 0,
+          "explanation": "La preparación corresponde a la intención de cambiar en los próximos 30 días."
+        },
+        {
+          "id": "T25-026",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "En la etapa de precontemplación, el principal objetivo del profesional sanitario es:",
+          "options": [
+            "Prevenir las recaídas.",
+            "Reforzar positivamente la conducta iniciada.",
+            "Conseguir que el paciente tome conciencia del problema.",
+            "Facilitar el mantenimiento más allá de seis meses."
+          ],
+          "correctAnswer": 2,
+          "explanation": "En precontemplación la persona no se plantea el cambio, por lo que se busca aumentar su conciencia del problema."
+        },
+        {
+          "id": "T25-027",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "El periodo correspondiente a la etapa de acción comprende:",
+          "options": [
+            "Los primeros 30 días.",
+            "Los seis primeros meses desde el inicio del cambio.",
+            "El periodo comprendido entre los seis y los doce meses.",
+            "Más de un año desde el cambio."
+          ],
+          "correctAnswer": 1,
+          "explanation": "La etapa de acción abarca los seis primeros meses desde el inicio del cambio."
+        },
+        {
+          "id": "T25-028",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "En el Modelo Transteórico, el mantenimiento se considera alcanzado cuando el cambio continúa:",
+          "options": [
+            "Más allá de los seis meses.",
+            "Más allá de los 30 días.",
+            "Durante los primeros seis meses.",
+            "Durante las primeras dos semanas."
+          ],
+          "correctAnswer": 0,
+          "explanation": "El mantenimiento comienza cuando la nueva conducta continúa más allá de los seis meses."
+        },
+        {
+          "id": "T25-029",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "En relación con la recaída en el Modelo Transteórico, señale la respuesta correcta:",
+          "options": [
+            "Solo puede producirse durante la etapa de acción.",
+            "Supone el fracaso definitivo de la intervención.",
+            "Es intrínseca a las diferentes fases y requiere reevaluación.",
+            "No se contempla dentro del modelo."
+          ],
+          "correctAnswer": 2,
+          "explanation": "La recaída forma parte del proceso de cambio y exige reevaluar la situación."
+        },
+        {
+          "id": "T25-030",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "La autoeficacia incluida en el Modelo Transteórico procede de la teoría cognitivo-social de:",
+          "options": [
+            "Alberto Bandura.",
+            "Rosenstock.",
+            "Kapferer.",
+            "Kreuter."
+          ],
+          "correctAnswer": 0,
+          "explanation": "El concepto de autoeficacia procede de la teoría cognitivo-social de Alberto Bandura."
+        },
+        {
+          "id": "T25-031",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "En la estrategia de las 5 Aes, ¿cuál es el orden correcto?",
+          "options": [
+            "Aconsejar, averiguar, ayudar, acordar y asegurar.",
+            "Averiguar, aconsejar, acordar, ayudar y asegurar el seguimiento.",
+            "Averiguar, acordar, aconsejar, asegurar y ayudar.",
+            "Acordar, averiguar, ayudar, aconsejar y asegurar."
+          ],
+          "correctAnswer": 1,
+          "explanation": "El orden es Assess, Advice, Agree, Assist y Arrange: averiguar, aconsejar, acordar, ayudar y asegurar seguimiento."
+        },
+        {
+          "id": "T25-032",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "En la estrategia de las 5 Aes, la fase «Averiguar» permite principalmente:",
+          "options": [
+            "Aplicar directamente un refuerzo positivo.",
+            "Identificar la etapa del cambio y los factores relevantes.",
+            "Programar exclusivamente el seguimiento.",
+            "Evaluar los resultados finales de la intervención."
+          ],
+          "correctAnswer": 1,
+          "explanation": "Averiguar sirve para identificar pacientes, características clave y la etapa de cambio."
+        },
+        {
+          "id": "T25-033",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "La Rueda del Cambio de Comportamiento se organiza en:",
+          "options": [
+            "Dos anillos y cinco fases.",
+            "Tres anillos.",
+            "Cuatro fases sucesivas.",
+            "Nueve etapas diagnósticas."
+          ],
+          "correctAnswer": 1,
+          "explanation": "La rueda presenta un centro y dos anillos: fuentes del comportamiento, intervenciones y políticas."
+        },
+        {
+          "id": "T25-034",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "Las tres condiciones esenciales situadas en el centro de la Rueda del Cambio son:",
+          "options": [
+            "Conocimiento, actitud y práctica.",
+            "Capacidad, motivación y oportunidad.",
+            "Predisposición, facilitación y refuerzo.",
+            "Información, decisión e interiorización."
+          ],
+          "correctAnswer": 1,
+          "explanation": "El centro de la rueda está formado por capacidad, motivación y oportunidad."
+        },
+        {
+          "id": "T25-035",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "En la Rueda del Cambio, los factores externos al individuo que hacen posible el comportamiento constituyen:",
+          "options": [
+            "La capacidad.",
+            "La motivación.",
+            "La oportunidad.",
+            "La autoeficacia."
+          ],
+          "correctAnswer": 2,
+          "explanation": "La oportunidad incluye todos los factores externos que hacen posible o inmediato el comportamiento."
+        },
+        {
+          "id": "T25-036",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "¿Cuál de las siguientes medidas pertenece al anillo externo de políticas de la Rueda del Cambio?",
+          "options": [
+            "Entrenamiento.",
+            "Modelaje.",
+            "Persuasión.",
+            "Legislación."
+          ],
+          "correctAnswer": 3,
+          "explanation": "La legislación es un tipo de política; entrenamiento, modelaje y persuasión son intervenciones."
+        },
+        {
+          "id": "T25-037",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "En el modelo PRECEDE–PROCEDE, los conocimientos, actitudes, creencias y valores son factores:",
+          "options": [
+            "Predisponentes.",
+            "Facilitadores.",
+            "Reforzantes.",
+            "Administrativos."
+          ],
+          "correctAnswer": 0,
+          "explanation": "Los factores predisponentes son internos, previos a la conducta y constituyen la principal fuente de motivación."
+        },
+        {
+          "id": "T25-038",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "En el modelo PRECEDE–PROCEDE, los recursos disponibles en el medio y las habilidades son factores:",
+          "options": [
+            "Reforzantes.",
+            "Facilitadores.",
+            "Predisponentes.",
+            "Epidemiológicos."
+          ],
+          "correctAnswer": 1,
+          "explanation": "Los factores facilitadores incluyen recursos del medio y habilidades necesarias para realizar la conducta."
+        },
+        {
+          "id": "T25-039",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "El reconocimiento de la familia después de que una persona haya cambiado una conducta constituye un factor:",
+          "options": [
+            "Predisponente.",
+            "Facilitador.",
+            "Reforzante.",
+            "Administrativo."
+          ],
+          "correctAnswer": 2,
+          "explanation": "Los factores reforzantes aparecen después de la conducta y favorecen su mantenimiento."
+        },
+        {
+          "id": "T25-040",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "¿Cuál es la sexta fase del modelo PRECEDE–PROCEDE?",
+          "options": [
+            "Diagnóstico epidemiológico.",
+            "Diagnóstico administrativo y político.",
+            "Ejecución o implementación.",
+            "Evaluación del impacto."
+          ],
+          "correctAnswer": 2,
+          "explanation": "Tras las cinco fases diagnósticas, la fase 6 corresponde a la ejecución o implementación."
+        },
+        {
+          "id": "T25-041",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "En PRECEDE–PROCEDE, la evaluación del proceso, del impacto y de los resultados corresponde respectivamente a las fases:",
+          "options": [
+            "5, 6 y 7.",
+            "6, 7 y 8.",
+            "7, 8 y 9.",
+            "8, 9 y 10."
+          ],
+          "correctAnswer": 2,
+          "explanation": "Las fases 7, 8 y 9 son evaluación del proceso, del impacto y de los resultados."
+        },
+        {
+          "id": "T25-042",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "En el modelo FACILE, tras tomar la decisión de cambiar, el siguiente paso consiste en:",
+          "options": [
+            "Interiorizar la conducta.",
+            "Probar la nueva conducta.",
+            "Sentir la necesidad del cambio.",
+            "Informarse sobre la conducta."
+          ],
+          "correctAnswer": 1,
+          "explanation": "La secuencia FACILE continúa con probar la nueva conducta después de decidir cambiar."
+        },
+        {
+          "id": "T25-043",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "¿Cuál es el último paso del modelo FACILE?",
+          "options": [
+            "Adoptar la nueva conducta.",
+            "Evaluar el proyecto.",
+            "Interiorizar la nueva conducta.",
+            "Tomar la decisión de cambiar."
+          ],
+          "correctAnswer": 2,
+          "explanation": "El sexto y último paso consiste en interiorizar la nueva conducta."
+        },
+        {
+          "id": "T25-044",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "La guía de Rochon para elaborar proyectos de Educación para la Salud consta de:",
+          "options": [
+            "Cinco fases.",
+            "Seis fases.",
+            "Siete fases.",
+            "Nueve fases."
+          ],
+          "correctAnswer": 1,
+          "explanation": "La guía práctica de Rochon se estructura en seis fases."
+        },
+        {
+          "id": "T25-045",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "Según la guía de Rochon, después del análisis bibliográfico debe realizarse:",
+          "options": [
+            "La evaluación de los resultados.",
+            "La puesta en marcha del proyecto.",
+            "La consulta y análisis de la población diana.",
+            "La aprobación de medidas legislativas."
+          ],
+          "correctAnswer": 2,
+          "explanation": "La tercera fase consiste en realizar consultas personales para conocer las necesidades de la población diana."
+        },
+        {
+          "id": "T25-046",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "El modelo integrador considera necesario incluir como unidad de atención a:",
+          "options": [
+            "La administración sanitaria.",
+            "El individuo exclusivamente.",
+            "La familia.",
+            "El grupo profesional."
+          ],
+          "correctAnswer": 2,
+          "explanation": "El modelo integrador incluye a la familia como unidad de atención."
+        },
+        {
+          "id": "T25-047",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "Incrementar el precio del tabaco como medida para reducir su consumo se relaciona principalmente con el modelo:",
+          "options": [
+            "De políticas económicas.",
+            "De creencias de salud.",
+            "FACILE.",
+            "Integrador."
+          ],
+          "correctAnswer": 0,
+          "explanation": "Modificar el precio del tabaco es una intervención sobre las políticas económicas."
+        },
+        {
+          "id": "T25-048",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "Preguntar a una persona fumadora si se ha planteado dejar de fumar en los próximos seis meses permite valorar:",
+          "options": [
+            "La etapa de cambio.",
+            "El diagnóstico epidemiológico.",
+            "La presión de grupo.",
+            "La atribución causal."
+          ],
+          "correctAnswer": 0,
+          "explanation": "La intención de cambiar en los próximos seis meses permite situar a la persona dentro de las etapas del cambio."
+        },
+        {
+          "id": "T25-049",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "En el modelo PRECEDE–PROCEDE, disponer de recursos sanitarios y financiación para abandonar el tabaco constituye un factor:",
+          "options": [
+            "Predisponente.",
+            "Facilitador.",
+            "Reforzante.",
+            "Motivacional."
+          ],
+          "correctAnswer": 1,
+          "explanation": "Los recursos sanitarios y la financiación facilitan que la conducta pueda llevarse a cabo."
+        },
+        {
+          "id": "T25-050",
+          "topicId": "tema-25",
+          "topicNumber": 25,
+          "topicName": "Modelos teóricos de modificación de comportamientos de salud",
+          "question": "Una persona fumadora manifiesta: «Mi padre fumó hasta los 80 años y nunca le ocurrió nada». Esta afirmación debería abordarse principalmente desde:",
+          "options": [
+            "El Modelo de Creencias de Salud.",
+            "El modelo FACILE.",
+            "La guía de Rochon.",
+            "El modelo integrador."
+          ],
+          "correctAnswer": 0,
+          "explanation": "La afirmación refleja una creencia personal sobre el riesgo y la gravedad del consumo de tabaco."
+        }
+      ];
+
+      const APP_VERSION = "1.0.0";
+      const STORAGE_KEYS = {
+        userName: "opeSespa_userName",
+        failedQuestionIds: "opeSespa_failedQuestionIds",
+        statistics: "opeSespa_statistics",
+        version: "opeSespa_version"
+      };
+
+      const app = document.getElementById("app");
+      const liveRegion = document.getElementById("live-region");
+      const state = {
+        questions: [],
+        userName: "",
+        failedQuestionIds: [],
+        statistics: createDefaultStats(),
+        pendingConfig: null,
+        activeQuiz: null,
+        lastQuizConfig: null,
+        lastResult: null
+      };
+
+      document.addEventListener("DOMContentLoaded", init);
+
+      function init() {
+        state.questions = loadQuestionBank();
+        loadUserData();
+        document.addEventListener("click", handleClick);
+        document.addEventListener("submit", handleSubmit);
+        window.addEventListener("beforeunload", handleBeforeUnload);
+        renderWelcome();
+      }
+
+      function loadQuestionBank() {
+        return QUESTION_BANK.filter(isValidQuestion);
+      }
+
+      function isValidQuestion(question) {
+        return Boolean(
+          question &&
+            typeof question.id === "string" &&
+            typeof question.topicId === "string" &&
+            Number.isInteger(question.topicNumber) &&
+            typeof question.topicName === "string" &&
+            typeof question.question === "string" &&
+            Array.isArray(question.options) &&
+            question.options.length === 4 &&
+            question.options.every(function (option) {
+              return typeof option === "string";
+            }) &&
+            Number.isInteger(question.correctAnswer) &&
+            question.correctAnswer >= 0 &&
+            question.correctAnswer <= 3 &&
+            typeof question.explanation === "string" &&
+            question.explanation.trim().length > 0
+        );
+      }
+
+      function loadUserData() {
+        state.userName = normalizeName(safeGet(STORAGE_KEYS.userName) || "");
+        state.failedQuestionIds = loadFailedIds();
+        state.statistics = normalizeStatistics(readJson(STORAGE_KEYS.statistics, createDefaultStats()));
+        saveStatistics();
+        safeSet(STORAGE_KEYS.version, APP_VERSION);
+      }
+
+      function normalizeName(value) {
+        return String(value || "")
+          .replace(/\s+/g, " ")
+          .trim()
+          .slice(0, 50);
+      }
+
+      function createDefaultStats() {
+        return {
+          answered: 0,
+          correct: 0,
+          incorrect: 0,
+          accuracy: 0,
+          failedPending: 0,
+          sessionsCompleted: 0,
+          topics: {}
+        };
+      }
+
+      function normalizeStatistics(raw) {
+        const stats = createDefaultStats();
+        if (!raw || typeof raw !== "object") {
+          return stats;
+        }
+
+        stats.correct = toSafeInteger(raw.correct);
+        stats.incorrect = toSafeInteger(raw.incorrect);
+        stats.answered = toSafeInteger(raw.answered);
+        if (stats.answered !== stats.correct + stats.incorrect) {
+          stats.answered = stats.correct + stats.incorrect;
+        }
+        stats.sessionsCompleted = toSafeInteger(raw.sessionsCompleted);
+        stats.failedPending = state.failedQuestionIds.length;
+        stats.accuracy = calculateAccuracy(stats.correct, stats.answered);
+
+        if (raw.topics && typeof raw.topics === "object" && !Array.isArray(raw.topics)) {
+          Object.keys(raw.topics).forEach(function (topicId) {
+            const knownTopic = getTopicById(topicId);
+            const rawTopic = raw.topics[topicId];
+            if (!knownTopic || !rawTopic || typeof rawTopic !== "object") {
+              return;
+            }
+
+            const correct = toSafeInteger(rawTopic.correct);
+            const incorrect = toSafeInteger(rawTopic.incorrect);
+            const answered = correct + incorrect;
+            stats.topics[topicId] = {
+              topicId: knownTopic.topicId,
+              topicNumber: knownTopic.topicNumber,
+              topicName: knownTopic.topicName,
+              answered: answered,
+              correct: correct,
+              incorrect: incorrect,
+              accuracy: calculateAccuracy(correct, answered)
+            };
+          });
+        }
+
+        return stats;
+      }
+
+      function toSafeInteger(value) {
+        const number = Number(value);
+        return Number.isFinite(number) && number > 0 ? Math.floor(number) : 0;
+      }
+
+      function loadFailedIds() {
+        const knownIds = new Set(state.questions.map(function (question) {
+          return question.id;
+        }));
+        const parsed = readJson(STORAGE_KEYS.failedQuestionIds, []);
+        if (!Array.isArray(parsed)) {
+          return [];
+        }
+
+        return parsed.filter(function (id, index, list) {
+          return typeof id === "string" && knownIds.has(id) && list.indexOf(id) === index;
+        });
+      }
+
+      function saveUserName(name) {
+        state.userName = normalizeName(name);
+        safeSet(STORAGE_KEYS.userName, state.userName);
+        safeSet(STORAGE_KEYS.version, APP_VERSION);
+      }
+
+      function saveFailedIds() {
+        safeSet(STORAGE_KEYS.failedQuestionIds, JSON.stringify(state.failedQuestionIds));
+        saveStatistics();
+      }
+
+      function saveStatistics() {
+        state.statistics.failedPending = state.failedQuestionIds.length;
+        state.statistics.accuracy = calculateAccuracy(state.statistics.correct, state.statistics.answered);
+        Object.keys(state.statistics.topics).forEach(function (topicId) {
+          const topic = state.statistics.topics[topicId];
+          topic.accuracy = calculateAccuracy(topic.correct, topic.answered);
+        });
+        safeSet(STORAGE_KEYS.statistics, JSON.stringify(state.statistics));
+        safeSet(STORAGE_KEYS.version, APP_VERSION);
+      }
+
+      function safeGet(key) {
+        try {
+          return window.localStorage.getItem(key);
+        } catch (error) {
+          return null;
+        }
+      }
+
+      function safeSet(key, value) {
+        try {
+          window.localStorage.setItem(key, value);
+        } catch (error) {
+          return false;
+        }
+        return true;
+      }
+
+      function safeRemove(key) {
+        try {
+          window.localStorage.removeItem(key);
+        } catch (error) {
+          return false;
+        }
+        return true;
+      }
+
+      function readJson(key, fallback) {
+        const raw = safeGet(key);
+        if (!raw) {
+          return fallback;
+        }
+
+        try {
+          return JSON.parse(raw);
+        } catch (error) {
+          return fallback;
+        }
+      }
+
+      function renderWelcome() {
+        setView(`
+          <section class="welcome-layout">
+            <div class="study-panel">
+              <p class="eyebrow">Preparación práctica</p>
+              <h1 id="view-title" tabindex="-1">OPE Enfermería — Preparador SESPA</h1>
+              <p class="lead">Entrena con preguntas tipo test, repasa fallos y conserva tus estadísticas en este navegador. Todo funciona desde este único archivo, también sin conexión.</p>
+              <div class="hero-metrics" aria-label="Resumen del banco de preguntas">
+                <div class="metric-card">
+                  <span class="metric-label">Preguntas</span>
+                  <strong class="metric-value" id="welcome-question-count"></strong>
+                </div>
+                <div class="metric-card">
+                  <span class="metric-label">Temas</span>
+                  <strong class="metric-value" id="welcome-topic-count"></strong>
+                </div>
+                <div class="metric-card">
+                  <span class="metric-label">Falladas</span>
+                  <strong class="metric-value" id="welcome-failed-count"></strong>
+                </div>
+              </div>
+            </div>
+            <form class="form-panel" id="name-form" novalidate>
+              <h2>Tu sesión de estudio</h2>
+              <div class="field-group">
+                <label for="user-name">Nombre</label>
+                <input id="user-name" name="userName" type="text" autocomplete="name" maxlength="50" />
+                <p class="help-text" id="name-help"></p>
+                <p class="field-error" id="name-error" aria-live="polite"></p>
+              </div>
+              <div class="button-row">
+                <button class="button" type="submit">${iconSvg("arrow")}Comenzar</button>
+              </div>
+            </form>
+          </section>
+        `);
+
+        document.getElementById("welcome-question-count").textContent = String(state.questions.length);
+        document.getElementById("welcome-topic-count").textContent = String(getTopics().length);
+        document.getElementById("welcome-failed-count").textContent = String(state.failedQuestionIds.length);
+        const input = document.getElementById("user-name");
+        const help = document.getElementById("name-help");
+        input.value = state.userName;
+        help.textContent = state.userName ? "He cargado el nombre guardado. Puedes mantenerlo o cambiarlo." : "El nombre se guarda solo en este navegador.";
+        focusTitle();
+      }
+
+      function renderDashboard() {
+        const accuracy = calculateAccuracy(state.statistics.correct, state.statistics.answered);
+        setView(`
+          <section class="view-stack">
+            <div class="dashboard-heading">
+              <p class="eyebrow">Menú principal</p>
+              <h1 id="view-title" tabindex="-1"></h1>
+              <p class="lead">Elige una modalidad de práctica y continúa construyendo tu banco de repaso.</p>
+            </div>
+            <div class="summary-grid" aria-label="Resumen de progreso">
+              <div class="metric-card">
+                <span class="metric-label">Respondidas</span>
+                <strong class="metric-value" id="summary-answered"></strong>
+              </div>
+              <div class="metric-card">
+                <span class="metric-label">Acierto global</span>
+                <strong class="metric-value" id="summary-accuracy"></strong>
+              </div>
+              <div class="metric-card">
+                <span class="metric-label">Falladas pendientes</span>
+                <strong class="metric-value" id="summary-failed"></strong>
+              </div>
+            </div>
+            <div class="action-grid" id="dashboard-actions" aria-label="Opciones del menú principal"></div>
+          </section>
+        `);
+
+        document.getElementById("view-title").textContent = state.userName ? "Hola, " + state.userName + ". ¿Qué quieres estudiar hoy?" : "¿Qué quieres estudiar hoy?";
+        document.getElementById("summary-answered").textContent = String(state.statistics.answered);
+        document.getElementById("summary-accuracy").textContent = formatPercent(accuracy);
+        document.getElementById("summary-failed").textContent = String(state.failedQuestionIds.length);
+
+        const actions = [
+          { action: "show-topics", icon: "layers", title: "Practicar por temas", meta: getTopics().length + " tema disponible" + plural(getTopics().length) },
+          { action: "practice-all", icon: "book", title: "Practicar todos los temas", meta: state.questions.length + " preguntas en el banco" },
+          { action: "show-failed", icon: "flag", title: "Repasar preguntas falladas", meta: state.failedQuestionIds.length + " pendiente" + plural(state.failedQuestionIds.length) },
+          { action: "show-stats", icon: "chart", title: "Consultar estadísticas", meta: state.statistics.sessionsCompleted + " sesión" + plural(state.statistics.sessionsCompleted) + " completada" + plural(state.statistics.sessionsCompleted) },
+          { action: "change-name", icon: "user", title: "Cambiar nombre", meta: "Personalización de mensajes" },
+          { action: "reset-progress", icon: "reset", title: "Reiniciar progreso", meta: "Borra datos guardados" }
+        ];
+
+        const container = document.getElementById("dashboard-actions");
+        actions.forEach(function (item) {
+          container.appendChild(createActionCard(item));
+        });
+        focusTitle();
+      }
+
+      function renderTopicSelector() {
+        if (!confirmLeaveActiveSession()) {
+          return;
+        }
+
+        setView(`
+          <section class="view-stack">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">Practicar por temas</p>
+                <h1 id="view-title" tabindex="-1">Elige un tema</h1>
+                <p class="lead">Las tarjetas se generan a partir de los temas detectados en el banco de preguntas.</p>
+              </div>
+              <button class="button ghost" type="button" data-action="go-dashboard">${iconSvg("back")}Volver al menú</button>
+            </div>
+            <div class="topic-grid" id="topic-grid"></div>
+          </section>
+        `);
+
+        const grid = document.getElementById("topic-grid");
+        getTopics().forEach(function (topic) {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "topic-card";
+          button.dataset.action = "select-topic";
+          button.dataset.topicId = topic.topicId;
+
+          const badge = document.createElement("span");
+          badge.className = "pill";
+          badge.textContent = "Tema " + topic.topicNumber;
+
+          const title = document.createElement("span");
+          title.className = "topic-title";
+          title.textContent = topic.topicName;
+
+          const meta = document.createElement("span");
+          meta.className = "topic-meta";
+          meta.textContent = topic.count + " pregunta" + plural(topic.count);
+
+          button.append(badge, title, meta);
+          grid.appendChild(button);
+        });
+        focusTitle();
+      }
+
+      function renderQuizOptions() {
+        if (!state.pendingConfig || state.pendingConfig.questions.length === 0) {
+          renderEmptyState("No hay preguntas disponibles", "Vuelve al menú para elegir otra modalidad.", "go-dashboard");
+          return;
+        }
+
+        setView(`
+          <section class="view-stack">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">Selector de test</p>
+                <h1 id="view-title" tabindex="-1"></h1>
+                <p class="lead" id="quiz-options-lead"></p>
+              </div>
+              <button class="button ghost" type="button" data-action="go-dashboard">${iconSvg("back")}Volver al menú</button>
+            </div>
+            <div class="quiz-options-grid" aria-label="Número de preguntas">
+              <button class="choice-button" type="button" data-action="choose-count" data-count="10">
+                <span class="choice-number">10</span>
+                <span class="choice-label">preguntas</span>
+              </button>
+              <button class="choice-button" type="button" data-action="choose-count" data-count="20">
+                <span class="choice-number">20</span>
+                <span class="choice-label">preguntas</span>
+              </button>
+              <button class="choice-button" type="button" data-action="choose-count" data-count="all">
+                <span class="choice-number" id="available-choice-count"></span>
+                <span class="choice-label">todas disponibles</span>
+              </button>
+            </div>
+          </section>
+        `);
+
+        document.getElementById("view-title").textContent = state.pendingConfig.title;
+        document.getElementById("quiz-options-lead").textContent = "Disponibles: " + state.pendingConfig.questions.length + " pregunta" + plural(state.pendingConfig.questions.length) + ". Si eliges más de las que hay, se usarán todas.";
+        document.getElementById("available-choice-count").textContent = String(state.pendingConfig.questions.length);
+        focusTitle();
+      }
+
+      function startQuiz(countChoice) {
+        const config = state.pendingConfig;
+        if (!config || config.questions.length === 0) {
+          renderEmptyState("No hay preguntas disponibles", "Vuelve al menú para elegir otra modalidad.", "go-dashboard");
+          return;
+        }
+
+        const available = config.questions.length;
+        const limit = countChoice === "all" ? available : Math.min(Number(countChoice), available);
+        const sessionQuestions = shuffleArray(config.questions).slice(0, limit);
+        state.activeQuiz = {
+          mode: config.mode,
+          topicId: config.topicId || null,
+          title: config.title,
+          countChoice: countChoice,
+          questions: sessionQuestions,
+          currentIndex: 0,
+          correct: 0,
+          incorrect: 0,
+          selectedIndex: null,
+          hasAnswered: false,
+          answers: [],
+          finished: false
+        };
+        announce("Test iniciado. " + sessionQuestions.length + " preguntas.");
+        renderQuestion(false);
+      }
+
+      function renderQuestion(focusNext) {
+        const quiz = state.activeQuiz;
+        if (!quiz || quiz.finished) {
+          renderDashboard();
+          return;
+        }
+
+        const question = quiz.questions[quiz.currentIndex];
+        const progress = Math.round(((quiz.currentIndex + 1) / quiz.questions.length) * 100);
+        setView(`
+          <section class="quiz-panel">
+            <div class="quiz-topline">
+              <div class="quiz-meta">
+                <span class="quiz-topic" id="quiz-topic"></span>
+                <span class="quiz-counter" id="quiz-counter"></span>
+              </div>
+              <button class="button ghost" type="button" data-action="abandon-quiz">${iconSvg("back")}Salir al menú</button>
+            </div>
+            <div class="progress-track" aria-label="Progreso del test">
+              <div class="progress-bar" id="quiz-progress"></div>
+            </div>
+            <div class="quiz-stat-grid" aria-label="Puntuación actual">
+              <div class="quiz-stat">
+                <span class="quiz-stat-label">Puntuación</span>
+                <strong class="quiz-stat-value" id="quiz-score"></strong>
+              </div>
+              <div class="quiz-stat">
+                <span class="quiz-stat-label">Aciertos</span>
+                <strong class="quiz-stat-value" id="quiz-correct"></strong>
+              </div>
+              <div class="quiz-stat">
+                <span class="quiz-stat-label">Fallos</span>
+                <strong class="quiz-stat-value" id="quiz-incorrect"></strong>
+              </div>
+            </div>
+            <h1 class="question-text" id="view-title" tabindex="-1"></h1>
+            <div class="options-group" id="options-group" role="group" aria-labelledby="view-title"></div>
+            <div id="feedback-slot"></div>
+            <div class="question-actions" id="question-actions"></div>
+          </section>
+        `);
+
+        document.getElementById("quiz-topic").textContent = "Tema " + question.topicNumber + " · " + question.topicName;
+        document.getElementById("quiz-counter").textContent = "Pregunta " + (quiz.currentIndex + 1) + " de " + quiz.questions.length;
+        document.getElementById("quiz-progress").style.width = progress + "%";
+        document.getElementById("quiz-score").textContent = quiz.correct + " / " + quiz.questions.length;
+        document.getElementById("quiz-correct").textContent = String(quiz.correct);
+        document.getElementById("quiz-incorrect").textContent = String(quiz.incorrect);
+        document.getElementById("view-title").textContent = question.question;
+
+        renderOptions(question, quiz);
+        renderFeedback(question, quiz);
+
+        if (focusNext) {
+          focusElement("next-question-button");
+        } else {
+          focusTitle();
+        }
+      }
+
+      function renderOptions(question, quiz) {
+        const group = document.getElementById("options-group");
+        question.options.forEach(function (option, index) {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "option-button";
+          button.dataset.action = "select-answer";
+          button.dataset.optionIndex = String(index);
+          button.disabled = quiz.hasAnswered;
+
+          if (quiz.hasAnswered) {
+            if (index === question.correctAnswer) {
+              button.classList.add("correct");
+            } else if (index === quiz.selectedIndex) {
+              button.classList.add("incorrect");
+            } else {
+              button.classList.add("neutral-after");
+            }
+          }
+
+          const letter = document.createElement("span");
+          letter.className = "option-letter";
+          letter.textContent = String.fromCharCode(65 + index);
+
+          const text = document.createElement("span");
+          text.className = "option-text";
+          text.textContent = option;
+
+          const answerState = document.createElement("span");
+          answerState.className = "answer-state";
+          if (quiz.hasAnswered && index === question.correctAnswer) {
+            answerState.textContent = "Correcta";
+          } else if (quiz.hasAnswered && index === quiz.selectedIndex) {
+            answerState.textContent = "Tu respuesta";
+          }
+
+          button.append(letter, text, answerState);
+          group.appendChild(button);
+        });
+      }
+
+      function renderFeedback(question, quiz) {
+        const slot = document.getElementById("feedback-slot");
+        const actions = document.getElementById("question-actions");
+        if (!quiz.hasAnswered) {
+          return;
+        }
+
+        const isCorrect = quiz.selectedIndex === question.correctAnswer;
+        const message = isCorrect
+          ? "Buen trabajo" + nameSuffix() + ". Respuesta correcta."
+          : "Respuesta incorrecta" + nameSuffix() + ". La opción correcta está señalada.";
+
+        slot.innerHTML = `
+          <div class="feedback ${isCorrect ? "success" : "error"}" role="status" aria-live="polite">
+            <span class="feedback-icon" aria-hidden="true">${iconSvg(isCorrect ? "check" : "x")}</span>
+            <div>
+              <strong id="feedback-title"></strong>
+              <p id="feedback-message"></p>
+              <p><strong>Explicación:</strong> <span id="feedback-explanation"></span></p>
+            </div>
+          </div>
+        `;
+        document.getElementById("feedback-title").textContent = isCorrect ? "Acierto registrado" : "Fallo registrado";
+        document.getElementById("feedback-message").textContent = message;
+        document.getElementById("feedback-explanation").textContent = question.explanation;
+
+        const nextButton = document.createElement("button");
+        nextButton.type = "button";
+        nextButton.id = "next-question-button";
+        nextButton.className = "button";
+        nextButton.dataset.action = "next-question";
+        nextButton.innerHTML = iconSvg("arrow") + (quiz.currentIndex === quiz.questions.length - 1 ? "Ver resultados" : "Siguiente pregunta");
+        actions.appendChild(nextButton);
+        announce(message + " " + question.explanation);
+      }
+
+      function selectAnswer(optionIndex) {
+        const quiz = state.activeQuiz;
+        if (!quiz || quiz.hasAnswered) {
+          return;
+        }
+
+        const selected = Number(optionIndex);
+        const question = quiz.questions[quiz.currentIndex];
+        if (!Number.isInteger(selected) || selected < 0 || selected >= question.options.length) {
+          return;
+        }
+
+        quiz.hasAnswered = true;
+        quiz.selectedIndex = selected;
+        const isCorrect = selected === question.correctAnswer;
+        if (isCorrect) {
+          quiz.correct += 1;
+          if (quiz.mode === "failed") {
+            removeFailedQuestion(question.id);
+          }
+        } else {
+          quiz.incorrect += 1;
+          saveFailedQuestion(question.id);
+        }
+
+        quiz.answers.push({
+          id: question.id,
+          selectedIndex: selected,
+          isCorrect: isCorrect
+        });
+        recordAnswer(question, isCorrect);
+        renderQuestion(true);
+      }
+
+      function nextQuestion() {
+        const quiz = state.activeQuiz;
+        if (!quiz || !quiz.hasAnswered) {
+          return;
+        }
+
+        if (quiz.currentIndex >= quiz.questions.length - 1) {
+          finishQuiz();
+          return;
+        }
+
+        quiz.currentIndex += 1;
+        quiz.selectedIndex = null;
+        quiz.hasAnswered = false;
+        announce("Vamos con la siguiente" + nameSuffix() + ".");
+        renderQuestion(false);
+      }
+
+      function finishQuiz() {
+        const quiz = state.activeQuiz;
+        if (!quiz) {
+          renderDashboard();
+          return;
+        }
+
+        quiz.finished = true;
+        const total = quiz.questions.length;
+        const percentage = calculateAccuracy(quiz.correct, total);
+        state.statistics.sessionsCompleted += 1;
+        saveStatistics();
+        state.lastQuizConfig = {
+          mode: quiz.mode,
+          topicId: quiz.topicId,
+          countChoice: quiz.countChoice,
+          title: quiz.title
+        };
+        state.lastResult = {
+          name: state.userName,
+          title: quiz.title,
+          total: total,
+          correct: quiz.correct,
+          incorrect: quiz.incorrect,
+          percentage: percentage
+        };
+        state.activeQuiz = null;
+        renderResults();
+      }
+
+      function renderResults() {
+        if (!state.lastResult) {
+          renderDashboard();
+          return;
+        }
+
+        setView(`
+          <section class="result-panel">
+            <p class="eyebrow">Sesión completada</p>
+            <h1 id="view-title" tabindex="-1"></h1>
+            <p class="lead" id="result-message"></p>
+            <div class="result-score" id="result-score"></div>
+            <div class="result-grid" aria-label="Detalle del resultado">
+              <div class="stat-card">
+                <span class="stat-label">Total</span>
+                <strong class="stat-value" id="result-total"></strong>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Aciertos</span>
+                <strong class="stat-value" id="result-correct"></strong>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Fallos</span>
+                <strong class="stat-value" id="result-incorrect"></strong>
+              </div>
+            </div>
+            <div class="button-row" style="margin-top: 20px;">
+              <button class="button" type="button" data-action="repeat-test">${iconSvg("reset")}Repetir test</button>
+              <button class="button secondary" type="button" data-action="show-failed">${iconSvg("flag")}Repasar falladas</button>
+              <button class="button ghost" type="button" data-action="go-dashboard">${iconSvg("back")}Volver al menú</button>
+            </div>
+          </section>
+        `);
+
+        const result = state.lastResult;
+        const title = result.name ? "Buen trabajo, " + result.name + "." : "Buen trabajo.";
+        document.getElementById("view-title").textContent = title;
+        document.getElementById("result-message").textContent = getResultMessage(result.percentage);
+        document.getElementById("result-score").textContent = formatPercent(result.percentage);
+        document.getElementById("result-total").textContent = String(result.total);
+        document.getElementById("result-correct").textContent = String(result.correct);
+        document.getElementById("result-incorrect").textContent = String(result.incorrect);
+        focusTitle();
+      }
+
+      function renderFailedReview() {
+        if (!confirmLeaveActiveSession()) {
+          return;
+        }
+
+        const failedQuestions = getFailedQuestions();
+        if (failedQuestions.length === 0) {
+          renderEmptyState("No tienes preguntas falladas pendientes", "Cuando falles una pregunta, aparecerá aquí para repasarla después.", "go-dashboard");
+          return;
+        }
+
+        setView(`
+          <section class="view-stack">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">Banco de falladas</p>
+                <h1 id="view-title" tabindex="-1"></h1>
+                <p class="lead">Las preguntas se guardan sin duplicados y salen del banco cuando las aciertas en este modo.</p>
+              </div>
+              <span class="pill" id="failed-count-pill"></span>
+            </div>
+            <div class="button-row">
+              <button class="button" type="button" data-action="start-failed-options">${iconSvg("arrow")}Iniciar repaso</button>
+              <button class="button danger" type="button" data-action="clear-failed">${iconSvg("x")}Vaciar banco</button>
+              <button class="button ghost" type="button" data-action="go-dashboard">${iconSvg("back")}Volver al menú</button>
+            </div>
+            <div class="failed-list" id="failed-list" aria-label="Preguntas falladas pendientes"></div>
+          </section>
+        `);
+
+        document.getElementById("view-title").textContent = "Repasar preguntas falladas";
+        document.getElementById("failed-count-pill").textContent = failedQuestions.length + " pendiente" + plural(failedQuestions.length);
+        const list = document.getElementById("failed-list");
+        failedQuestions.forEach(function (question) {
+          const item = document.createElement("article");
+          item.className = "failed-item";
+          const topic = document.createElement("p");
+          topic.className = "topic-meta";
+          topic.textContent = "Tema " + question.topicNumber + " · " + question.topicName;
+          const text = document.createElement("strong");
+          text.textContent = question.question;
+          item.append(topic, text);
+          list.appendChild(item);
+        });
+        focusTitle();
+      }
+
+      function renderStatistics() {
+        if (!confirmLeaveActiveSession()) {
+          return;
+        }
+
+        const accuracy = calculateAccuracy(state.statistics.correct, state.statistics.answered);
+        setView(`
+          <section class="view-stack">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">Estadísticas</p>
+                <h1 id="view-title" tabindex="-1">Tu progreso</h1>
+                <p class="lead">Los datos se guardan en este navegador y se recalculan tras cada respuesta.</p>
+              </div>
+              <button class="button ghost" type="button" data-action="go-dashboard">${iconSvg("back")}Volver al menú</button>
+            </div>
+            <div class="stats-grid" aria-label="Estadísticas globales">
+              <div class="stat-card">
+                <span class="stat-label">Respondidas</span>
+                <strong class="stat-value" id="stats-answered"></strong>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Correctas</span>
+                <strong class="stat-value" id="stats-correct"></strong>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Incorrectas</span>
+                <strong class="stat-value" id="stats-incorrect"></strong>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Acierto global</span>
+                <strong class="stat-value" id="stats-accuracy"></strong>
+                <div class="bar-line" aria-hidden="true"><span id="stats-accuracy-bar"></span></div>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Falladas pendientes</span>
+                <strong class="stat-value" id="stats-failed"></strong>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Sesiones completadas</span>
+                <strong class="stat-value" id="stats-sessions"></strong>
+              </div>
+            </div>
+            <section>
+              <h2>Resultados por tema</h2>
+              <div class="topic-stat-list" id="topic-stat-list"></div>
+            </section>
+          </section>
+        `);
+
+        document.getElementById("stats-answered").textContent = String(state.statistics.answered);
+        document.getElementById("stats-correct").textContent = String(state.statistics.correct);
+        document.getElementById("stats-incorrect").textContent = String(state.statistics.incorrect);
+        document.getElementById("stats-accuracy").textContent = formatPercent(accuracy);
+        document.getElementById("stats-accuracy-bar").style.width = accuracy + "%";
+        document.getElementById("stats-failed").textContent = String(state.failedQuestionIds.length);
+        document.getElementById("stats-sessions").textContent = String(state.statistics.sessionsCompleted);
+
+        const list = document.getElementById("topic-stat-list");
+        getTopics().forEach(function (topic) {
+          const topicStats = state.statistics.topics[topic.topicId] || {
+            answered: 0,
+            correct: 0,
+            incorrect: 0,
+            accuracy: 0
+          };
+          const item = document.createElement("article");
+          item.className = "topic-stat-item";
+
+          const head = document.createElement("div");
+          head.className = "topic-stat-head";
+          const title = document.createElement("strong");
+          title.textContent = "Tema " + topic.topicNumber + " · " + topic.topicName;
+          const percent = document.createElement("span");
+          percent.className = "pill";
+          percent.textContent = formatPercent(topicStats.accuracy);
+          head.append(title, percent);
+
+          const meta = document.createElement("p");
+          meta.className = "topic-meta";
+          meta.textContent = topicStats.answered + " respondida" + plural(topicStats.answered) + " · " + topicStats.correct + " acierto" + plural(topicStats.correct) + " · " + topicStats.incorrect + " fallo" + plural(topicStats.incorrect);
+
+          const bar = document.createElement("div");
+          bar.className = "bar-line";
+          bar.setAttribute("aria-hidden", "true");
+          const fill = document.createElement("span");
+          fill.style.width = topicStats.accuracy + "%";
+          bar.appendChild(fill);
+
+          item.append(head, meta, bar);
+          list.appendChild(item);
+        });
+        focusTitle();
+      }
+
+      function renderEmptyState(title, message, action) {
+        setView(`
+          <section class="empty-state">
+            <p class="eyebrow">Estado</p>
+            <h1 id="view-title" tabindex="-1"></h1>
+            <p class="lead" id="empty-message"></p>
+            <div class="button-row">
+              <button class="button ghost" type="button" data-action="${action}">${iconSvg("back")}Volver al menú</button>
+            </div>
+          </section>
+        `);
+        document.getElementById("view-title").textContent = title;
+        document.getElementById("empty-message").textContent = message;
+        focusTitle();
+      }
+
+      function handleSubmit(event) {
+        if (event.target && event.target.id === "name-form") {
+          event.preventDefault();
+          const input = document.getElementById("user-name");
+          const error = document.getElementById("name-error");
+          const name = normalizeName(input.value);
+          if (!name) {
+            error.textContent = "Introduce un nombre para personalizar la sesión.";
+            input.focus();
+            return;
+          }
+
+          error.textContent = "";
+          saveUserName(name);
+          announce("Nombre guardado. Hola, " + state.userName + ".");
+          renderDashboard();
+        }
+      }
+
+      function handleClick(event) {
+        const trigger = event.target.closest("[data-action]");
+        if (!trigger) {
+          return;
+        }
+
+        const action = trigger.dataset.action;
+        if (action === "go-dashboard") {
+          if (confirmLeaveActiveSession()) {
+            renderDashboard();
+          }
+        } else if (action === "show-topics") {
+          renderTopicSelector();
+        } else if (action === "practice-all") {
+          if (confirmLeaveActiveSession()) {
+            state.pendingConfig = {
+              mode: "all",
+              title: "Practicar todos los temas",
+              questions: state.questions.slice()
+            };
+            renderQuizOptions();
+          }
+        } else if (action === "select-topic") {
+          const topicId = trigger.dataset.topicId;
+          const topic = getTopicById(topicId);
+          if (topic) {
+            state.pendingConfig = {
+              mode: "topic",
+              topicId: topic.topicId,
+              title: "Tema " + topic.topicNumber + " · " + topic.topicName,
+              questions: state.questions.filter(function (question) {
+                return question.topicId === topic.topicId;
+              })
+            };
+            renderQuizOptions();
+          }
+        } else if (action === "choose-count") {
+          startQuiz(trigger.dataset.count);
+        } else if (action === "select-answer") {
+          selectAnswer(trigger.dataset.optionIndex);
+        } else if (action === "next-question") {
+          nextQuestion();
+        } else if (action === "abandon-quiz") {
+          if (confirmLeaveActiveSession()) {
+            renderDashboard();
+          }
+        } else if (action === "show-failed") {
+          renderFailedReview();
+        } else if (action === "start-failed-options") {
+          state.pendingConfig = {
+            mode: "failed",
+            title: "Repasar preguntas falladas",
+            questions: getFailedQuestions()
+          };
+          renderQuizOptions();
+        } else if (action === "clear-failed") {
+          clearFailedQuestions();
+        } else if (action === "show-stats") {
+          renderStatistics();
+        } else if (action === "change-name") {
+          if (confirmLeaveActiveSession()) {
+            renderWelcome();
+          }
+        } else if (action === "reset-progress") {
+          resetProgress();
+        } else if (action === "repeat-test") {
+          repeatLastTest();
+        }
+      }
+
+      function handleBeforeUnload(event) {
+        if (state.activeQuiz && !state.activeQuiz.finished) {
+          event.preventDefault();
+          event.returnValue = "";
+        }
+      }
+
+      function confirmLeaveActiveSession() {
+        if (!state.activeQuiz || state.activeQuiz.finished) {
+          return true;
+        }
+
+        const leave = window.confirm("Hay una sesión activa. Si sales ahora, se cerrará el test actual.");
+        if (leave) {
+          state.activeQuiz = null;
+        }
+        return leave;
+      }
+
+      function repeatLastTest() {
+        const config = state.lastQuizConfig;
+        if (!config) {
+          renderDashboard();
+          return;
+        }
+
+        if (config.mode === "topic") {
+          const topic = getTopicById(config.topicId);
+          if (!topic) {
+            renderDashboard();
+            return;
+          }
+          state.pendingConfig = {
+            mode: "topic",
+            topicId: topic.topicId,
+            title: "Tema " + topic.topicNumber + " · " + topic.topicName,
+            questions: state.questions.filter(function (question) {
+              return question.topicId === topic.topicId;
+            })
+          };
+        } else if (config.mode === "failed") {
+          state.pendingConfig = {
+            mode: "failed",
+            title: "Repasar preguntas falladas",
+            questions: getFailedQuestions()
+          };
+        } else {
+          state.pendingConfig = {
+            mode: "all",
+            title: "Practicar todos los temas",
+            questions: state.questions.slice()
+          };
+        }
+
+        startQuiz(config.countChoice);
+      }
+
+      function resetProgress() {
+        if (!confirmLeaveActiveSession()) {
+          return;
+        }
+
+        const confirmed = window.confirm("Se borrarán nombre, estadísticas y preguntas falladas. ¿Quieres reiniciar todo el progreso?");
+        if (!confirmed) {
+          return;
+        }
+
+        safeRemove(STORAGE_KEYS.userName);
+        safeRemove(STORAGE_KEYS.failedQuestionIds);
+        safeRemove(STORAGE_KEYS.statistics);
+        safeRemove(STORAGE_KEYS.version);
+        state.userName = "";
+        state.failedQuestionIds = [];
+        state.statistics = createDefaultStats();
+        state.pendingConfig = null;
+        state.activeQuiz = null;
+        state.lastQuizConfig = null;
+        state.lastResult = null;
+        announce("Progreso reiniciado.");
+        renderWelcome();
+      }
+
+      function clearFailedQuestions() {
+        const confirmed = window.confirm("¿Quieres vaciar el banco de preguntas falladas?");
+        if (!confirmed) {
+          return;
+        }
+
+        state.failedQuestionIds = [];
+        saveFailedIds();
+        announce("Banco de falladas vaciado.");
+        renderFailedReview();
+      }
+
+      function recordAnswer(question, isCorrect) {
+        state.statistics.answered += 1;
+        if (isCorrect) {
+          state.statistics.correct += 1;
+        } else {
+          state.statistics.incorrect += 1;
+        }
+
+        if (!state.statistics.topics[question.topicId]) {
+          state.statistics.topics[question.topicId] = {
+            topicId: question.topicId,
+            topicNumber: question.topicNumber,
+            topicName: question.topicName,
+            answered: 0,
+            correct: 0,
+            incorrect: 0,
+            accuracy: 0
+          };
+        }
+
+        const topic = state.statistics.topics[question.topicId];
+        topic.answered += 1;
+        if (isCorrect) {
+          topic.correct += 1;
+        } else {
+          topic.incorrect += 1;
+        }
+        saveStatistics();
+      }
+
+      function saveFailedQuestion(id) {
+        if (!state.failedQuestionIds.includes(id)) {
+          state.failedQuestionIds.push(id);
+          saveFailedIds();
+        }
+      }
+
+      function removeFailedQuestion(id) {
+        const nextIds = state.failedQuestionIds.filter(function (failedId) {
+          return failedId !== id;
+        });
+        if (nextIds.length !== state.failedQuestionIds.length) {
+          state.failedQuestionIds = nextIds;
+          saveFailedIds();
+        }
+      }
+
+      function getFailedQuestions() {
+        const byId = new Map(state.questions.map(function (question) {
+          return [question.id, question];
+        }));
+        const questions = state.failedQuestionIds
+          .map(function (id) {
+            return byId.get(id);
+          })
+          .filter(Boolean);
+
+        if (questions.length !== state.failedQuestionIds.length) {
+          state.failedQuestionIds = questions.map(function (question) {
+            return question.id;
+          });
+          saveFailedIds();
+        }
+
+        return questions;
+      }
+
+      function getTopics() {
+        const map = new Map();
+        state.questions.forEach(function (question) {
+          if (!map.has(question.topicId)) {
+            map.set(question.topicId, {
+              topicId: question.topicId,
+              topicNumber: question.topicNumber,
+              topicName: question.topicName,
+              count: 0
+            });
+          }
+          map.get(question.topicId).count += 1;
+        });
+
+        return Array.from(map.values()).sort(function (a, b) {
+          return a.topicNumber - b.topicNumber || a.topicName.localeCompare(b.topicName, "es");
+        });
+      }
+
+      function getTopicById(topicId) {
+        return getTopics().find(function (topic) {
+          return topic.topicId === topicId;
+        });
+      }
+
+      function createActionCard(item) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "action-card";
+        button.dataset.action = item.action;
+
+        const icon = document.createElement("span");
+        icon.className = "action-icon";
+        icon.setAttribute("aria-hidden", "true");
+        icon.innerHTML = iconSvg(item.icon);
+
+        const title = document.createElement("span");
+        title.className = "action-title";
+        title.textContent = item.title;
+
+        const meta = document.createElement("span");
+        meta.className = "action-meta";
+        meta.textContent = item.meta;
+
+        button.append(icon, title, meta);
+        return button;
+      }
+
+      function setView(html) {
+        app.innerHTML = html;
+        window.scrollTo(0, 0);
+      }
+
+      function focusTitle() {
+        focusElement("view-title");
+      }
+
+      function focusElement(id) {
+        window.requestAnimationFrame(function () {
+          const element = document.getElementById(id);
+          if (element && typeof element.focus === "function") {
+            element.focus({ preventScroll: true });
+          }
+        });
+      }
+
+      function announce(message) {
+        liveRegion.textContent = message;
+      }
+
+      function shuffleArray(array) {
+        const copy = array.slice();
+        for (let index = copy.length - 1; index > 0; index -= 1) {
+          const randomIndex = Math.floor(Math.random() * (index + 1));
+          const item = copy[index];
+          copy[index] = copy[randomIndex];
+          copy[randomIndex] = item;
+        }
+        return copy;
+      }
+
+      function calculateAccuracy(correct, total) {
+        if (!total) {
+          return 0;
+        }
+        return Math.round((correct / total) * 100);
+      }
+
+      function formatPercent(value) {
+        return Math.round(value) + "%";
+      }
+
+      function getResultMessage(percentage) {
+        if (percentage >= 90) {
+          return "¡Excelente resultado!";
+        }
+        if (percentage >= 70) {
+          return "Muy buen trabajo.";
+        }
+        if (percentage >= 50) {
+          return "Vas por buen camino.";
+        }
+        return "Conviene repasar este tema.";
+      }
+
+      function plural(count) {
+        return count === 1 ? "" : "s";
+      }
+
+      function nameSuffix() {
+        return state.userName ? ", " + state.userName : "";
+      }
+
+      function iconSvg(name) {
+        const icons = {
+          arrow: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+          back: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+          book: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4.8A2.8 2.8 0 0 1 7.8 2H20v18H7.8A2.8 2.8 0 0 0 5 22V4.8Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="M5 4.8A2.8 2.8 0 0 0 2.2 2H2v18h.2A2.8 2.8 0 0 1 5 22" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>',
+          layers: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/><path d="m4 12 8 4.5 8-4.5M4 16l8 4.5 8-4.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+          flag: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 21V4m0 0h10.5l-.9 4 4.4 1.5V16H5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+          chart: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5M4 19h16" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><path d="M8 16v-5M12 16V8M16 16v-7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+          user: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" stroke="currentColor" stroke-width="1.9"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>',
+          reset: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.35-5.66L4 8.7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 4v4.7h4.7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+          check: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.2 4.2L19 6.8" stroke="#047857" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+          x: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17" stroke="#b42318" stroke-width="2.4" stroke-linecap="round"/></svg>'
+        };
+        return icons[name] || "";
+      }
+    </script>
+  </body>
+</html>
